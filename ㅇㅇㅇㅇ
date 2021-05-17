@@ -1,0 +1,12 @@
+const request = require('request')
+const cheerio = require('cheerio')
+
+let url = 'http://openapi.data.go.kr/openapi/service/rest/Covid19';
+request(url, function (error, response, body) {
+    const $ = cheerio.load(body);
+    let colArr = $(".num")
+    console.log(`확진자`, colArr[0].children[0].data)
+    console.log(`격리해제`, colArr[1].children[0].data)
+    console.log(`검사진행`, colArr[2].children[0].data)
+    console.log(`사망자`, colArr[3].children[0].data)
+})
